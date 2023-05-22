@@ -18,9 +18,10 @@ def prepare_data_for_chart(file_types, total, free):
     """
     sizes = [file_types[key] / (1024 ** 3) for key in file_types]
     sizes.append(free / (1024 ** 3))
-    labels = list(file_types.keys())
-    labels.append('Free space')
-    return sizes, labels
+    legend_labels = [f"{key} ({(size / total) * 100:.2f}%)" for key, size in
+                     file_types.items()]
+    legend_labels.append(f"Free space ({(free / total) * 100:.2f}%)")
+    return sizes, legend_labels
 
 
 def make_autopct(values):
@@ -44,23 +45,26 @@ def make_autopct(values):
         """
         total = sum(values)
         val = pct * total / 100.0
-        return '{p:.2f}%  ({v:.2f} GB)'.format(p=pct, v=val)
+        return '{v:.2f} GB'.format(v=val)
 
     return my_autopct
 
 
-def draw_pie_chart(sizes, labels):
+def draw_pie_chart(sizes, legend_labels):
     """
     Рисует круговую диаграмму, используя предоставленные размеры и метки
 
     :param sizes: Список размеров для каждого среза диаграммы.
-    :type sizes: list
-    :param labels: список меток для каждого среза диаграммы
-    :type labels: list
+    :type sizes: list[float]
+    :param legend_labels: Список меток для каждого среза диаграммы.
+    :type legend_labels: list[str]
     :return: None
     :rtype: None
     """
     fig1, ax1 = plt.subplots()
-    ax1.pie(sizes, labels=labels, autopct=make_autopct(sizes))
+    wedges, _, _ = ax1.pie(sizes, autopct=make_autopct(sizes))
     ax1.axis('equal')
+    plt.subplots_adjust(right=0.6)
+    plt.legend(wedges, legend_labels, title="Categories", loc="center left",
+               bbox_to_anchor=(1, 0, 0.5, 1))
     plt.show()
