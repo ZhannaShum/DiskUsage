@@ -2,23 +2,37 @@ import os
 import fnmatch
 
 extensions = {
-    'Images': ['*.jpg', '*.png', '*.jpeg', '*.gif', '*.tiff', '*.bmp', '*.ico'],
-    'Videos': ['*.mp4', '*.mkv', '*.flv', '*.avi', '*.mov', '*.wmv', '*.mpeg', '*.m4v'],
-    'Audio': ['*.mp3', '*.wav', '*.flac', '*.aac', '*.ogg', '*.m4a', '*.aiff'],
-    'Documents': ['*.doc', '*.docx', '*.pdf', '*.txt', '*.ppt', '*.pptx', '*.xlsx', '*.xls', '*.odt'],
-    'Archives': ['*.zip', '*.rar', '*.7z', '*.gzip', '*.tar', '*.iso', '*.jar', '*.apk'],
-    'Webpages': ['*.html', '*.htm', '*.mht', '*.xml', '*.css', '*.json', '*.js'],
+    'Images':
+        ['*.jpg', '*.png', '*.jpeg', '*.gif', '*.tiff', '*.bmp', '*.ico'],
+    'Videos':
+        ['*.mp4', '*.mkv', '*.flv', '*.avi', '*.mov', '*.wmv', '*.mpeg',
+         '*.m4v'],
+    'Audio':
+        ['*.mp3', '*.wav', '*.flac', '*.aac', '*.ogg', '*.m4a', '*.aiff'],
+    'Documents':
+        ['*.doc', '*.docx', '*.pdf', '*.txt', '*.ppt', '*.pptx', '*.xlsx',
+         '*.xls', '*.odt'],
+    'Archives': ['*.zip', '*.rar', '*.7z', '*.gzip', '*.tar', '*.iso', '*.jar',
+                 '*.apk'],
+    'Webpages':
+        ['*.html', '*.htm', '*.mht', '*.xml', '*.css', '*.json', '*.js'],
     'Torrents': ['*.torrent'],
-    'Ebooks': ['*.fb2', '*.epub', '*.mobi', '*.azw', '*.azw3', '*.lit'],
-    'Programs': ['*.exe', '*.bat', '*.sh', '*.py', '*.js', '*.php', '*.pl', '*.rb', '*.java', '*.class', '*.dll'],
-    'Databases': ['*.sql', '*.db', '*.dbf', '*.mdb', '*.accdb', '*.sqlite', '*.sqlite3'],
+    'Ebooks':
+        ['*.fb2', '*.epub', '*.mobi', '*.azw', '*.azw3', '*.lit'],
+    'Programs':
+        ['*.exe', '*.bat', '*.sh', '*.py', '*.js', '*.php', '*.pl',
+         '*.rb', '*.java', '*.class', '*.dll'],
+    'Databases':
+        ['*.sql', '*.db', '*.dbf', '*.mdb', '*.accdb', '*.sqlite',
+         '*.sqlite3'],
     'Fonts': ['*.ttf', '*.otf', '*.fon', '*.fnt']
 }
 
 
 def get_size(path):
     """
-    Вычисляет общий размер всех файлов в каталоге, указанном по заданному пути, включая файлы в подкаталогах
+    Вычисляет общий размер всех файлов в каталоге, указанном по заданному пути,
+    включая файлы в подкаталогах
 
     :param path: Путь к каталогу для поиска.
     :type path: str
